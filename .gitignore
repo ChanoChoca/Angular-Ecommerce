@@ -3,3 +3,5 @@ angular-ecommerce/.angular
 angular-ecommerce/.idea
 spring-boot-ecommerce/.idea
 spring-boot-ecommerce/target
+
+spring-boot-ecommerce/src/main/resources/application.properties
