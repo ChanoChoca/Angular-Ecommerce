@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:angular-eccomerce-final": "node dist/angular-eccomerce-final/server/server.mjs"
+    "serve:ssr:angular-eccomerce": "node dist/angular-eccomerce/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,10 @@
     "@angular/ssr": "^18.0.3",
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "@okta/okta-angular": "^6.4.0",
+    "@okta/okta-auth-js": "^7.7.0",
+    "@okta/okta-signin-widget": "^7.19.4",
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
