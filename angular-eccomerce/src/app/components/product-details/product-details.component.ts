@@ -8,7 +8,7 @@ import {CartItem} from "../../common/cart-item";
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css'
+  styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class ProductDetailsComponent implements OnInit {
     })
   }
 
-  private handleProductDetails() {
+  handleProductDetails() {
 
     //Obtener id, convertirlo a numero
     const theProductId: number = +this.route.snapshot.paramMap.get('id')!;
@@ -41,7 +41,7 @@ export class ProductDetailsComponent implements OnInit {
   addToCart() {
 
     console.log(`Adding to cart: ${this.product.name}, ${this.product.unitPrice}`);
-    const theCartItem = new CartItem(this.product);
+    const theCartItem = new CartItem(this.product.id, this.product.name, this.product.imageUrl, this.product.unitPrice);
     this.cartService.addToCart(theCartItem);
 
   }

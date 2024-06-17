@@ -8,7 +8,7 @@ import {CartService} from "../../services/cart.service";
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list-grid.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
 
@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
-    })
+    });
   }
 
   listProducts() {
@@ -98,7 +98,7 @@ export class ProductListComponent implements OnInit {
     this.listProducts(); //actualizar la vista de pagina
   }
 
-  private processResult() {
+  processResult() {
     return (data: any) => {
       this.products = data._embedded.products;
       this.thePageNumber = data.page.number + 1;
@@ -111,7 +111,7 @@ export class ProductListComponent implements OnInit {
 
     console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
 
-    const theCartItem = new CartItem(theProduct);
+    const theCartItem = new CartItem(theProduct.id, theProduct.name, theProduct.imageUrl, theProduct.unitPrice);
 
     this.cartService.addToCart(theCartItem);
   }

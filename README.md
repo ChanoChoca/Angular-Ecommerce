@@ -1,4 +1,4 @@
-# Final POO
+# Angular Ecommerce with Spring Boot
 
 This is a full stack project made with angular and spring boot
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
 import {Product} from "../common/product";
+import {Observable} from "rxjs";
+import { map } from 'rxjs/operators';
 import {ProductCategory} from "../common/product-category";
 
 @Injectable({
@@ -9,7 +10,7 @@ import {ProductCategory} from "../common/product-category";
 })
 export class ProductService {
 
-  private baseUrl = 'http://localhost:8080/api/products?size=100';
+  private baseUrl = 'http://localhost:8080/api/products';
 
   private categoryUrl = 'http://localhost:8080/api/product-category';
 
@@ -59,7 +60,7 @@ export class ProductService {
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
 
-  private getProducts(searchUrl: string) {
+  private getProducts(searchUrl: string): Observable<Product[]> {
     //mapear el JSON de Spring Data REST a array de Product
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
       map(response => response._embedded.products)

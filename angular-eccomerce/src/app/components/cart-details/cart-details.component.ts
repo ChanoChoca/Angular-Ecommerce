@@ -5,7 +5,7 @@ import {CartService} from "../../services/cart.service";
 @Component({
   selector: 'app-cart-details',
   templateUrl: './cart-details.component.html',
-  styleUrl: './cart-details.component.css'
+  styleUrls: ['./cart-details.component.css']
 })
 export class CartDetailsComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class CartDetailsComponent implements OnInit {
     this.listCartDetails();
   }
 
-  private listCartDetails() {
+  listCartDetails() {
 
     //Obtener un manejador de items de carrito
     this.cartItems = this.cartService.cartItems;

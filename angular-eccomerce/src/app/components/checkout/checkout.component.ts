@@ -14,7 +14,7 @@ import {Purchase} from "../../common/purchase";
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.css'
+  styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
 
@@ -31,6 +31,8 @@ export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
+  storage: Storage = sessionStorage;
+
   constructor(private formBuilder: FormBuilder,
               private chanoChocaFormService: ChanoChocaFormService,
               private cartService: CartService,
@@ -41,6 +43,9 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
 
     this.reviewCartDetails();
+
+    //Leer la dirección de correo del usuario desde almacen de navegador
+    const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -54,7 +59,7 @@ export class CheckoutComponent implements OnInit {
               Validators.minLength(2),
               ChanoChocaValidators.notOnlyWhitespace]),
 
-        email: new FormControl('',
+        email: new FormControl(theEmail,
             [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
@@ -121,14 +126,14 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  private reviewCartDetails() {
+  reviewCartDetails() {
 
     //Subscribirse a cantidad y precio de carrito
     this. cartService.totalQuantity.subscribe(
         totalQuantity => this.totalQuantity = totalQuantity
     );
 
-    this. cartService.totalQuantity.subscribe(
+    this. cartService.totalPrice.subscribe(
         totalPrice => this.totalPrice = totalPrice
     );
   }
@@ -183,9 +188,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     //Configurar orden
-    let order = new Order();
-    order.totalPrice = this.totalPrice;
-    order.totalQuantity = this.totalQuantity;
+    let order = new Order(this.totalQuantity, this.totalPrice);
 
     const cartItems = this.cartService.cartItems;
 
@@ -196,7 +199,7 @@ export class CheckoutComponent implements OnInit {
     // }
 
     //Manera más corta de realizar lo de arriba
-    let orderItemsShort: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
+    let orderItemsShort: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem.imageUrl, tempCartItem.unitPrice, tempCartItem.quantity, tempCartItem.id));
 
     //Configurar compra
     let purchase = new Purchase();

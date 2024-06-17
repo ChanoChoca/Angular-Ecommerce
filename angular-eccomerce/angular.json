@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-eccomerce-final": {
+    "angular-ecommerce": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -32,28 +32,22 @@
               "@okta/okta-signin-widget"
             ],
 
-            "outputPath": "dist/angular-eccomerce-final",
+            "outputPath": "dist/angular-ecommerce",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "aot": true,
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -83,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-eccomerce-final:build:production"
+              "buildTarget": "angular-ecommerce:build:production"
             },
             "development": {
-              "buildTarget": "angular-eccomerce-final:build:development"
+              "buildTarget": "angular-ecommerce:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,10 +97,8 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css",

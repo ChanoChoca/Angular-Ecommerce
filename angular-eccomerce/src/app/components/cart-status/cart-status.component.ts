@@ -4,9 +4,9 @@ import {CartService} from "../../services/cart.service";
 @Component({
   selector: 'app-cart-status',
   templateUrl: './cart-status.component.html',
-  styleUrl: './cart-status.component.css'
+  styleUrls: ['./cart-status.component.css']
 })
-export class CartStatusComponent implements OnInit{
+export class CartStatusComponent implements OnInit {
 
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
